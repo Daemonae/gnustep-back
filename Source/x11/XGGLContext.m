@@ -404,6 +404,10 @@ static XGGLContext *currentGLContext;
   ASSIGN(pixelFormat, (XGGLPixelFormat *)_format);
   
   glx_context = [pixelFormat createGLXContext: (XGGLContext *)share];
+  if (!glx_context) {
+      RELEASE(self);
+      return nil;
+  }
   
   return self;
 }
